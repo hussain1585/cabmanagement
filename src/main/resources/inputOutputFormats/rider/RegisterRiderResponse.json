@@ -1,17 +1,6 @@
 {
-  "name": "Hussain Akhtar Wahid",
   "mobileNo": "8826295165",
-  "email": "hussain1585@gmail.com",
-  "addresses": [
-    {
-      "houseOwnerSalutation": "C/O",
-      "houseOwner": "Hussain Akhtar Sajid",
-      "houseNo": "R-279/6",
-      "floorNo": "3",
-      "pinCode": "110025",
-      "city": "Delhi",
-      "state": "Delhi",
-      "country": "India"
-    }
-  ]
+  "name": "Hussain Akhtar Wahid",
+  "registrationStatus": "SUCCESS",
+  "error": null
 }

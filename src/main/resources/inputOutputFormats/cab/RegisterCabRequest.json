@@ -1,17 +1,11 @@
 {
-  "name": "Hussain Akhtar Wahid",
-  "mobileNo": "8826295165",
-  "email": "hussain1585@gmail.com",
-  "addresses": [
-    {
-      "houseOwnerSalutation": "C/O",
-      "houseOwner": "Hussain Akhtar Sajid",
-      "houseNo": "R-279/6",
-      "floorNo": "3",
-      "pinCode": "110025",
-      "city": "Delhi",
-      "state": "Delhi",
-      "country": "India"
-    }
-  ]
+  "vehicleBrand": "TATA",
+  "vehicleModel": "Altroz",
+  "vehicleColor": "RED",
+  "vehicleType": "HATCH_BACK",
+  "registrationNumber": "UP-14-EQ-1371",
+  "currentLocation": {
+    "longitude": 77.305283,
+    "latitude": 28.547640
+  }
 }

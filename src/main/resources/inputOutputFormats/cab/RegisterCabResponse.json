@@ -1,6 +1,16 @@
 {
-  "mobileNo": "8826295165",
-  "name": "Hussain Akhtar Wahid",
+  "vehicleBrand": "TATA",
+  "vehicleModel": "Altroz",
+  "vehicleColor": "RED",
+  "vehicleType": "HATCH_BACK",
+  "registrationNumber": "UP-14-EQ-1371",
+  "currentLocation": {
+    "locationId": 0,
+    "longitude": 77.305283,
+    "latitude": 28.54764
+  },
+  "cabMovementStatus": null,
   "registrationStatus": "SUCCESS",
-  "error": null
+  "error": null,
+  "available": false
 }
