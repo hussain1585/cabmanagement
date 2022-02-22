@@ -1,2 +1,5 @@
-package com.phonpe.cabmanagement.manager;public class CabManager {
+package com.phonpe.cabmanagement.manager;
+
+public class CabManager
+{
 }

@@ -1,2 +1,5 @@
-package com.phonpe.cabmanagement.manager;public class LocationManager {
+package com.phonpe.cabmanagement.manager;
+
+public class LocationManager
+{
 }
