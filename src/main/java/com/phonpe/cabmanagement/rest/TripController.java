@@ -1,2 +1,25 @@
-package com.phonpe.cabmanagement.rest;public class TripController {
+package com.phonpe.cabmanagement.rest;
+
+import com.phonpe.cabmanagement.dto.CabApplicationResponse;
+import com.phonpe.cabmanagement.dto.trip.BookTripReqeust;
+import com.phonpe.cabmanagement.dto.trip.BookTripResponse;
+import com.phonpe.cabmanagement.service.TripService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@Slf4j
+@RestController
+public class TripController
+{
+    @Autowired
+    private TripService tripService;
+
+    @PostMapping("/book/trip")
+    public CabApplicationResponse bookTrip(@RequestBody BookTripReqeust bookTripReqeust)
+    {
+        return tripService.bookTrip(bookTripReqeust);
+    }
 }
