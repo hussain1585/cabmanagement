@@ -1,4 +1,4 @@
-package com.phonpe.cabmanagement.dto;
+package com.phonpe.cabmanagement.dto.rider;
 
 import com.phonpe.cabmanagement.domain.Address;
 import lombok.AllArgsConstructor;

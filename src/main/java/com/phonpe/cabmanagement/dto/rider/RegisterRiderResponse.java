@@ -1,6 +1,6 @@
 package com.phonpe.cabmanagement.dto.rider;
 
-import com.phonpe.cabmanagement.dto.CabManagementResponse;
+import com.phonpe.cabmanagement.dto.CabApplicationResponse;
 import com.phonpe.cabmanagement.enums.ApplicationConstants;
 import lombok.*;
 
@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-public class RegisterRiderResponse extends CabManagementResponse
+public class RegisterRiderResponse extends CabApplicationResponse
 {
     private String mobileNo;
     private String name;
