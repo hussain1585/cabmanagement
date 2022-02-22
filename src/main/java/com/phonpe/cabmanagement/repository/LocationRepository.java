@@ -1,8 +1,8 @@
 package com.phonpe.cabmanagement.repository;
 
-import com.phonpe.cabmanagement.domain.Cab;
+import com.phonpe.cabmanagement.domain.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TripRepository extends JpaRepository<Cab, Long>
+public interface LocationRepository extends JpaRepository<Location, Long>
 {
 }
