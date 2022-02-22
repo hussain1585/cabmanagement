@@ -1,5 +1,5 @@
 package com.phonpe.cabmanagement.dto;
 
-public abstract class CabManagementResponse
+public abstract class CabApplicationResponse
 {
 }
