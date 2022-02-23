@@ -1,46 +1,46 @@
 package com.phonpe.cabmanagement.listener;
 
-import com.phonpe.cabmanagement.domain.Cab;
+import com.phonpe.cabmanagement.domain.ServiceCities;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 
 @Slf4j
-public class CabEntityListener
+public class ServiceCityEntityListener
 {
     @PrePersist
-    public void prePersist(Cab cab)
+    public void prePersist(ServiceCities serviceCities)
     {
-        log.info("prePersist : entity booking with id=>{} will be persisted to DB with body", cab.getCabId(), cab);
+        log.info("prePersist : entity ServiceCities with id=>{} will be persisted to DB with body", serviceCities.getCityId(), serviceCities);
     }
 
     @PostPersist
-    public void postPersist(Cab cab)
+    public void postPersist(ServiceCities serviceCities)
     {
-        log.info("postPersist : entity booking with id=>{} is persisted to DB with body", cab.getCabId(), cab);
+        log.info("postPersist : entity ServiceCities with id=>{} is persisted to DB with body", serviceCities.getCityId(), serviceCities);
     }
 
     @PreUpdate
-    public void preUpdate(Cab cab)
+    public void preUpdate(ServiceCities serviceCities)
     {
-        log.info("preUpdate : entity booking with id=>{} will be updated to DB with body", cab.getCabId(), cab);
+        log.info("preUpdate : entity ServiceCities with id=>{} will be updated to DB with body", serviceCities.getCityId(), serviceCities);
     }
 
     @PostUpdate
-    public void postUpdate(Cab cab)
+    public void postUpdate(ServiceCities serviceCities)
     {
-        log.info("postUpdate : entity booking with id=>{} is updated to DB with body", cab.getCabId(), cab);
+        log.info("postUpdate : entity ServiceCities with id=>{} is updated to DB with body", serviceCities.getCityId(), serviceCities);
     }
 
     @PreRemove
-    public void preRemove(Cab cab)
+    public void preRemove(ServiceCities serviceCities)
     {
-        log.info("preRemove : entity booking with id=>{} will be removed from DB with body", cab.getCabId(), cab);
+        log.info("preRemove : entity ServiceCities with id=>{} will be removed from DB with body", serviceCities.getCityId(), serviceCities);
     }
 
     @PostRemove
-    public void postRemove(Cab cab)
+    public void postRemove(ServiceCities serviceCities)
     {
-        log.info("postRemove : entity booking with id=>{} is removed to DB with body", cab.getCabId(), cab);
+        log.info("postRemove : entity ServiceCities with id=>{} is removed to DB with body", serviceCities.getCityId(), serviceCities);
     }
 }

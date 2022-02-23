@@ -9,6 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class BookTripReqeust
+public class BookTripRequest
 {
+    private long Id;
 }

@@ -1,8 +1,7 @@
 package com.phonpe.cabmanagement.rest;
 
 import com.phonpe.cabmanagement.dto.CabApplicationResponse;
-import com.phonpe.cabmanagement.dto.trip.BookTripReqeust;
-import com.phonpe.cabmanagement.dto.trip.BookTripResponse;
+import com.phonpe.cabmanagement.dto.trip.BookTripRequest;
 import com.phonpe.cabmanagement.service.TripService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,8 @@ public class TripController
     private TripService tripService;
 
     @PostMapping("/book/trip")
-    public CabApplicationResponse bookTrip(@RequestBody BookTripReqeust bookTripReqeust)
+    public CabApplicationResponse bookTrip(@RequestBody BookTripRequest bookTripRequest)
     {
-        return tripService.bookTrip(bookTripReqeust);
+        return tripService.bookTrip(bookTripRequest);
     }
 }
