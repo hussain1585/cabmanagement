@@ -3,9 +3,10 @@ package com.phonpe.cabmanagement.rest;
 import com.phonpe.cabmanagement.domain.Cab;
 import com.phonpe.cabmanagement.dto.CabApplicationResponse;
 import com.phonpe.cabmanagement.dto.GetNearByCabsRequest;
+import com.phonpe.cabmanagement.dto.cab.CabChangeCabMovementStatusRequest;
 import com.phonpe.cabmanagement.dto.cab.CabChangeLocationRequest;
 import com.phonpe.cabmanagement.dto.cab.RegisterCabRequest;
-import com.phonpe.cabmanagement.dto.rider.RegisterRiderRequest;
+import com.phonpe.cabmanagement.dto.cab.ToggleCabMovementStatusRequest;
 import com.phonpe.cabmanagement.service.CabService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,19 @@ public class CabController
     public CabApplicationResponse changeLocation(@RequestBody CabChangeLocationRequest cabChangeLocationRequest)
     {
         return cabService.changeLocation(cabChangeLocationRequest);
+    }
+
+    @PostMapping("/cab/changeCabMovementStatus")
+    public CabApplicationResponse changeCabMovementStatus(@RequestBody CabChangeCabMovementStatusRequest cabChangeCabMovementStatusRequest)
+    {
+        return cabService.changeCabMovementStatus(cabChangeCabMovementStatusRequest);
+    }
+
+
+    @PostMapping("/cab/toggleCabMovementStatus")
+    public CabApplicationResponse toggleCabMovementStatus(@RequestBody ToggleCabMovementStatusRequest toggleCabMovementStatusRequest)
+    {
+        return cabService.toggleCabMovementStatus(toggleCabMovementStatusRequest);
     }
 
 

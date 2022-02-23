@@ -4,22 +4,21 @@ import com.phonpe.cabmanagement.domain.Cab;
 import com.phonpe.cabmanagement.domain.Location;
 import com.phonpe.cabmanagement.dto.CabApplicationResponse;
 import com.phonpe.cabmanagement.dto.GetNearByCabsRequest;
-import com.phonpe.cabmanagement.dto.cab.CabChangeLocationRequest;
-import com.phonpe.cabmanagement.dto.cab.CabChangeLocationResponse;
-import com.phonpe.cabmanagement.dto.cab.RegisterCabRequest;
-import com.phonpe.cabmanagement.dto.cab.RegisterCabResponse;
+import com.phonpe.cabmanagement.dto.cab.*;
 import com.phonpe.cabmanagement.enums.ApplicationConstants;
 import com.phonpe.cabmanagement.enums.CabMovementStatus;
 import com.phonpe.cabmanagement.enums.VehicleType;
 import com.phonpe.cabmanagement.exception.CabAlreadyRegisteredException;
 import com.phonpe.cabmanagement.exception.UnregisteredCabException;
 import com.phonpe.cabmanagement.repository.CabRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.Set;
 
+@Slf4j
 @Service
 public class CabService
 {
@@ -84,9 +83,10 @@ public class CabService
 
         CabChangeLocationResponse cabChangeLocationResponse = CabChangeLocationResponse.builder()
                 .newLocation(newLocation)
+                .cabId(cabId)
                 .build();
 
-        Optional<Cab> cabById = cabRepository.findAllById(cabId);
+        Optional<Cab> cabById = cabRepository.findAllByCabId(cabId);
         if (cabById.isEmpty())
         {
             throw new UnregisteredCabException(String.format("cab with cabId => %d is not registered", cabId));
@@ -94,9 +94,68 @@ public class CabService
         {
             Cab cab = cabById.get();
             cabChangeLocationResponse.setOldLocation(cab.getCurrentLocation());
+            cabChangeLocationResponse.setLocationUpdateStatus(ApplicationConstants.SUCCESS);
             cab.setCurrentLocation(newLocation);
             cabRepository.save(cab);
         }
         return cabChangeLocationResponse;
+    }
+
+    public CabApplicationResponse changeCabMovementStatus(CabChangeCabMovementStatusRequest cabChangeCabMovementStatusRequest)
+    {
+        long cabId = cabChangeCabMovementStatusRequest.getCabId();
+        CabMovementStatus newCabMovementStatus = cabChangeCabMovementStatusRequest.getCabMovementStatus();
+        CabChangeCabMovementStatusResponse cabChangeCabMovementStatusResponse = CabChangeCabMovementStatusResponse.builder()
+                .cabId(cabId)
+                .newCabMovementStatus(newCabMovementStatus)
+                .cabMovementStatusChangeStatus(ApplicationConstants.FAILURE)
+                .build();
+
+        Optional<Cab> cabById = cabRepository.findAllByCabId(cabId);
+        if (cabById.isEmpty())
+        {
+            throw new UnregisteredCabException(String.format("cab with cabId => %d is not registered", cabId));
+        } else
+        {
+            Cab cab = cabById.get();
+
+            CabMovementStatus oldCabMovementStatus = cab.getCabMovementStatus();
+            if (oldCabMovementStatus == newCabMovementStatus)
+            {
+                log.info("NEW CAB MOVEMENT STATUS IS ALREADY CURRENT STATUS");
+            }
+            cabChangeCabMovementStatusResponse.setOldCabMovementStatus(oldCabMovementStatus);
+            cab.setCabMovementStatus(newCabMovementStatus);
+            cabChangeCabMovementStatusResponse.setCabMovementStatusChangeStatus(ApplicationConstants.SUCCESS);
+            cabRepository.save(cab);
+        }
+        return cabChangeCabMovementStatusResponse;
+    }
+
+    public CabApplicationResponse toggleCabMovementStatus(ToggleCabMovementStatusRequest toggleCabMovementStatusRequest)
+    {
+        long cabId = toggleCabMovementStatusRequest.getCabId();
+
+
+        ToggleCabMovementStatusResponse toggleCabMovementStatusResponse = ToggleCabMovementStatusResponse.builder()
+                .cabId(cabId)
+                .build();
+
+        Optional<Cab> cabById = cabRepository.findAllByCabId(cabId);
+        if (cabById.isEmpty())
+        {
+            throw new UnregisteredCabException(String.format("cab with cabId => %d is not registered", cabId));
+        } else
+        {
+            Cab cab = cabById.get();
+            CabMovementStatus oldCabMovementStatus = cab.getCabMovementStatus();
+            CabMovementStatus newCabMovementStatus = (oldCabMovementStatus == CabMovementStatus.IDLE) ? CabMovementStatus.ON_TRIP : CabMovementStatus.ON_TRIP;
+            toggleCabMovementStatusResponse.setNewStatus(newCabMovementStatus);
+            toggleCabMovementStatusResponse.setOldStatus(oldCabMovementStatus);
+            cab.setCabMovementStatus(newCabMovementStatus);
+            toggleCabMovementStatusResponse.setToggleStatus(ApplicationConstants.SUCCESS);
+            cabRepository.save(cab);
+        }
+        return toggleCabMovementStatusResponse;
     }
 }
