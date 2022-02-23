@@ -35,7 +35,7 @@ public class ServiceCitiesService
                 .build();
 
 
-        Optional<ServiceCities> allServiceCitiesByCityName = serviceCityRepository.findAllByCityName(city);
+        Optional<ServiceCities> allServiceCitiesByCityName = serviceCityRepository.findAllByCity(city);
         if (allServiceCitiesByCityName.isEmpty())
         {
             ServiceCities serviceCity = ServiceCities.builder()
