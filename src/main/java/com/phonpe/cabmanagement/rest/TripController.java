@@ -1,6 +1,7 @@
 package com.phonpe.cabmanagement.rest;
 
 import com.phonpe.cabmanagement.dto.CabApplicationResponse;
+import com.phonpe.cabmanagement.dto.trip.BookTripByGivenCabAndRiderRequest;
 import com.phonpe.cabmanagement.dto.trip.BookTripRequest;
 import com.phonpe.cabmanagement.service.TripService;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,13 @@ public class TripController
     @Autowired
     private TripService tripService;
 
-    @PostMapping("/trip/book")
+    @PostMapping("/trip/bookTripByGivenCabAndRider")
+    public CabApplicationResponse bookTripByGivenCabAndRider(@RequestBody BookTripByGivenCabAndRiderRequest bookTripByGivenCabAndRiderRequest)
+    {
+        return tripService.bookTripByGivenCabAndRider(bookTripByGivenCabAndRiderRequest);
+    }
+
+    @PostMapping("/trip/bookTrip")
     public CabApplicationResponse bookTrip(@RequestBody BookTripRequest bookTripRequest)
     {
         return tripService.bookTrip(bookTripRequest);

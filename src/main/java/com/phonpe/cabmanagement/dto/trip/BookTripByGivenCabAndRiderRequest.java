@@ -1,25 +1,29 @@
 package com.phonpe.cabmanagement.dto.trip;
 
+import com.phonpe.cabmanagement.domain.Bill;
 import com.phonpe.cabmanagement.domain.Location;
-import com.phonpe.cabmanagement.dto.CabApplicationResponse;
-import com.phonpe.cabmanagement.enums.ApplicationConstants;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Getter
 @Setter
-public class BookTripResponse extends CabApplicationResponse
+public class BookTripByGivenCabAndRiderRequest
 {
     private Location startLocation;
     private Location bookedDestination;
+    private Location droppedDestination;
+    private Bill bill;
     private LocalDate rideStartDate;
     private LocalTime rideStartTime;
+    private LocalDate rideCompletionDate;
+    private LocalTime rideCompletionTime;
     private String RiderMobileNo;
-    private String error;
-    private ApplicationConstants bookTripStatus;
+    private String CabRegistrationNumber;
 }

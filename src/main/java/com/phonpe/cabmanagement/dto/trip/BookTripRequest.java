@@ -18,12 +18,7 @@ public class BookTripRequest
 {
     private Location startLocation;
     private Location bookedDestination;
-    private Location droppedDestination;
-    private Bill bill;
     private LocalDate rideStartDate;
     private LocalTime rideStartTime;
-    private LocalDate rideCompletionDate;
-    private LocalTime rideCompletionTime;
     private String RiderMobileNo;
-    private String CabRegistrationNumber;
 }

@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BaseUtil
 {
-    public double getDifferenceBetweenLocations(Location loc1, Location loc2)
+    public static double getDifferenceBetweenLocations(Location loc1, Location loc2)
     {
 
         // The math module contains a function
