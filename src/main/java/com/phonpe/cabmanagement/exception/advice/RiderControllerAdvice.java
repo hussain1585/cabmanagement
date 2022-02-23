@@ -1,7 +1,7 @@
 package com.phonpe.cabmanagement.exception.advice;
 
 import com.phonpe.cabmanagement.dto.CabApplicationExceptionResponse;
-import com.phonpe.cabmanagement.exception.CabAlreadyRegisteredException;
+import com.phonpe.cabmanagement.exception.CityWithNoServiceException;
 import com.phonpe.cabmanagement.exception.RiderAlreadyRegisteredException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 @Slf4j
 @ControllerAdvice
-public class CabManagementAdvice
+public class RiderControllerAdvice
 {
     @ExceptionHandler(RiderAlreadyRegisteredException.class)
     public ResponseEntity<CabApplicationExceptionResponse> handleRiderAlreadyRegisteredException(RiderAlreadyRegisteredException riderAlreadyRegisteredException)
@@ -30,29 +30,18 @@ public class CabManagementAdvice
         return new ResponseEntity<>(cabApplicationExceptionResponse, httpStatus);
     }
 
-    @ExceptionHandler(CabAlreadyRegisteredException.class)
-    public ResponseEntity<CabApplicationExceptionResponse> handleCabAlreadyRegisteredException(CabAlreadyRegisteredException cabAlreadyRegisteredException)
+    @ExceptionHandler(CityWithNoServiceException.class)
+    public ResponseEntity<CabApplicationExceptionResponse> handleCityWithNoServiceException(CityWithNoServiceException cityWithNoServiceException)
     {
-        log.debug("handling API exception => CabAlreadyRegisteredException ");
-        //        ZonedDateTime now = ZonedDateTime.now();
+        log.info("handling API exception => CityWithNoServiceException ");
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+
         CabApplicationExceptionResponse cabApplicationExceptionResponse = CabApplicationExceptionResponse
                 .builder()
-                .error(cabAlreadyRegisteredException.getMessage())
-                .httpStatus(HttpStatus.BAD_REQUEST)
+                .error(cityWithNoServiceException.getMessage())
+                .httpStatus(httpStatus)
+                .localDateTime(LocalDateTime.now())
                 .build();
-
-        return new ResponseEntity<>(cabApplicationExceptionResponse, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<CabApplicationExceptionResponse> handleGenericException(Exception exception)
-    {
-        log.info("handling API exception => Exception ");
-        CabApplicationExceptionResponse cabApplicationExceptionResponse = CabApplicationExceptionResponse
-                .builder()
-                .error(exception.getMessage())
-                .httpStatus(HttpStatus.BAD_REQUEST)
-                .build();
-        return new ResponseEntity<>(cabApplicationExceptionResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(cabApplicationExceptionResponse, httpStatus);
     }
 }
