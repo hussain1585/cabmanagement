@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor
@@ -25,7 +22,8 @@ public class Address
     private String houseNo;
     private String floorNo;
     private String pinCode;
-    private String city;
-    private String state;
-    private String country;
+
+    @ManyToOne
+    @JoinColumn(name = "address_service_city_fk")
+    private ServiceCity serviceCity;
 }
