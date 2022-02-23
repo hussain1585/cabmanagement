@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Builder
 @Data
-public class ServiceCities
+public class ServiceCity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

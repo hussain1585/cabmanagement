@@ -1,6 +1,6 @@
 package com.phonpe.cabmanagement.service;
 
-import com.phonpe.cabmanagement.domain.ServiceCities;
+import com.phonpe.cabmanagement.domain.ServiceCity;
 import com.phonpe.cabmanagement.dto.CabApplicationResponse;
 import com.phonpe.cabmanagement.dto.serviceCity.AddServiceCityRequest;
 import com.phonpe.cabmanagement.dto.serviceCity.AddServiceCityResponse;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class ServiceCitiesService
+public class ServiceCityService
 {
     @Autowired
     private ServiceCityRepository serviceCityRepository;
@@ -35,10 +35,10 @@ public class ServiceCitiesService
                 .build();
 
 
-        Optional<ServiceCities> allServiceCitiesByCityName = serviceCityRepository.findAllByCity(city);
+        Optional<ServiceCity> allServiceCitiesByCityName = serviceCityRepository.findAllByCity(city);
         if (allServiceCitiesByCityName.isEmpty())
         {
-            ServiceCities serviceCity = ServiceCities.builder()
+            ServiceCity serviceCity = ServiceCity.builder()
                     .city(city)
                     .state(state)
                     .country(country)
