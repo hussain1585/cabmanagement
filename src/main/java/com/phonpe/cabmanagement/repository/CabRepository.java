@@ -12,4 +12,6 @@ public interface CabRepository extends JpaRepository<Cab, Long>
 {
 
     Optional<Cab> findAllByRegistrationNumber(String registrationNumber);
+
+    Optional<Cab> findAllById(long cabId);
 }

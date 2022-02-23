@@ -3,6 +3,7 @@ package com.phonpe.cabmanagement.rest;
 import com.phonpe.cabmanagement.domain.Cab;
 import com.phonpe.cabmanagement.dto.CabApplicationResponse;
 import com.phonpe.cabmanagement.dto.GetNearByCabsRequest;
+import com.phonpe.cabmanagement.dto.cab.CabChangeLocationRequest;
 import com.phonpe.cabmanagement.dto.cab.RegisterCabRequest;
 import com.phonpe.cabmanagement.dto.rider.RegisterRiderRequest;
 import com.phonpe.cabmanagement.service.CabService;
@@ -29,9 +30,17 @@ public class CabController
         return cabService.getNearByCabs(getNearByCabsRequest);
     }
 
-    @PostMapping("/register/cab")
+    @PostMapping("/cab/register")
     public CabApplicationResponse registerCab(@RequestBody RegisterCabRequest registerCabRequest)
     {
         return cabService.registerCab(registerCabRequest);
     }
+
+    @PostMapping("/cab/changeLocation")
+    public CabApplicationResponse changeLocation(@RequestBody CabChangeLocationRequest cabChangeLocationRequest)
+    {
+        return cabService.changeLocation(cabChangeLocationRequest);
+    }
+
+
 }

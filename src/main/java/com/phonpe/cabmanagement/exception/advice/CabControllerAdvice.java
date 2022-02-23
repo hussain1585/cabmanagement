@@ -3,6 +3,7 @@ package com.phonpe.cabmanagement.exception.advice;
 import com.phonpe.cabmanagement.dto.CabApplicationExceptionResponse;
 import com.phonpe.cabmanagement.exception.CabAlreadyRegisteredException;
 import com.phonpe.cabmanagement.exception.RiderAlreadyRegisteredException;
+import com.phonpe.cabmanagement.exception.UnregisteredCabException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,21 @@ public class CabControllerAdvice
         CabApplicationExceptionResponse cabApplicationExceptionResponse = CabApplicationExceptionResponse
                 .builder()
                 .error(cabAlreadyRegisteredException.getMessage())
+                .httpStatus(HttpStatus.BAD_REQUEST)
+                .build();
+
+        return new ResponseEntity<>(cabApplicationExceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+
+    @ExceptionHandler(UnregisteredCabException.class)
+    public ResponseEntity<CabApplicationExceptionResponse> handleUnregisteredCabException(UnregisteredCabException unregisteredCabException)
+    {
+        log.debug("handling API exception => UnregisteredCabException ");
+        //        ZonedDateTime now = ZonedDateTime.now();
+        CabApplicationExceptionResponse cabApplicationExceptionResponse = CabApplicationExceptionResponse
+                .builder()
+                .error(unregisteredCabException.getMessage())
                 .httpStatus(HttpStatus.BAD_REQUEST)
                 .build();
 

@@ -4,12 +4,15 @@ import com.phonpe.cabmanagement.domain.Cab;
 import com.phonpe.cabmanagement.domain.Location;
 import com.phonpe.cabmanagement.dto.CabApplicationResponse;
 import com.phonpe.cabmanagement.dto.GetNearByCabsRequest;
+import com.phonpe.cabmanagement.dto.cab.CabChangeLocationRequest;
+import com.phonpe.cabmanagement.dto.cab.CabChangeLocationResponse;
 import com.phonpe.cabmanagement.dto.cab.RegisterCabRequest;
 import com.phonpe.cabmanagement.dto.cab.RegisterCabResponse;
 import com.phonpe.cabmanagement.enums.ApplicationConstants;
 import com.phonpe.cabmanagement.enums.CabMovementStatus;
 import com.phonpe.cabmanagement.enums.VehicleType;
 import com.phonpe.cabmanagement.exception.CabAlreadyRegisteredException;
+import com.phonpe.cabmanagement.exception.UnregisteredCabException;
 import com.phonpe.cabmanagement.repository.CabRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,4 +77,26 @@ public class CabService
     }
 
 
+    public CabApplicationResponse changeLocation(CabChangeLocationRequest cabChangeLocationRequest)
+    {
+        long cabId = cabChangeLocationRequest.getCabId();
+        Location newLocation = cabChangeLocationRequest.getLocation();
+
+        CabChangeLocationResponse cabChangeLocationResponse = CabChangeLocationResponse.builder()
+                .newLocation(newLocation)
+                .build();
+
+        Optional<Cab> cabById = cabRepository.findAllById(cabId);
+        if (cabById.isEmpty())
+        {
+            throw new UnregisteredCabException(String.format("cab with cabId => %d is not registered", cabId));
+        } else
+        {
+            Cab cab = cabById.get();
+            cabChangeLocationResponse.setOldLocation(cab.getCurrentLocation());
+            cab.setCurrentLocation(newLocation);
+            cabRepository.save(cab);
+        }
+        return cabChangeLocationResponse;
+    }
 }
