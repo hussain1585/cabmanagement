@@ -23,7 +23,7 @@ public class Address
     private String floorNo;
     private String pinCode;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_service_city_fk")
     private ServiceCity serviceCity;
 }

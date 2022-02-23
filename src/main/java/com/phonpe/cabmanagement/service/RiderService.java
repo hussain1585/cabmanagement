@@ -7,18 +7,22 @@ import com.phonpe.cabmanagement.dto.CabApplicationResponse;
 import com.phonpe.cabmanagement.dto.rider.RegisterRiderRequest;
 import com.phonpe.cabmanagement.dto.rider.RegisterRiderResponse;
 import com.phonpe.cabmanagement.enums.ApplicationConstants;
+import com.phonpe.cabmanagement.exception.CityWithNoServiceException;
 import com.phonpe.cabmanagement.exception.RiderAlreadyRegisteredException;
 import com.phonpe.cabmanagement.repository.RiderRepository;
 import com.phonpe.cabmanagement.repository.ServiceCityRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Slf4j
 @Service
+@Qualifier(value = "riderService")
 public class RiderService
 {
 
@@ -27,6 +31,8 @@ public class RiderService
 
     @Autowired
     private ServiceCityRepository serviceCityRepository;
+
+    List<ServiceCity> allServiceCities = new ArrayList<>();
 
     public CabApplicationResponse registerRider(RegisterRiderRequest registerRiderRequest)
     {
@@ -62,24 +68,20 @@ public class RiderService
 
     private void validateAddresses(List<Address> addressList)
     {
-        List<ServiceCity> allServiceCities = serviceCityRepository.findAll();
-
-        for (Address address : addressList)
+        if (allServiceCities.isEmpty())
         {
-            boolean contains = allServiceCities.contains(address.getServiceCity());
-            log.info("contains : {}", contains);
+            allServiceCities = serviceCityRepository.findAll();
         }
-
-        //        List<String> allRegisteredCityNameList = serviceCityRepository.findAll().stream().map(currentServiceCity -> currentServiceCity.getCity()).collect(Collectors.toList());
-        //
-        //
-        //        List<String> citylist = addressList.stream().map(p -> p.getCity()).collect(Collectors.toList());
-        //        citylist.forEach(cityName ->
-        //        {
-        //            if (!allRegisteredCityNameList.contains(cityName))
-        //            {
-        //                throw new CityWithNoServiceException(String.format("city with name %s is not served fro now", cityName));
-        //            }
-        //        });
+        addressList.forEach(address ->
+        {
+            ServiceCity serviceCity = address.getServiceCity();
+            if (!allServiceCities.contains(serviceCity))
+            {
+                throw new CityWithNoServiceException(String.format("city with name %s is not served for now", serviceCity.getCity()));
+            } else
+            {
+                address.setServiceCity(serviceCityRepository.findAllByCity(serviceCity.getCity()).get());
+            }
+        });
     }
 }
