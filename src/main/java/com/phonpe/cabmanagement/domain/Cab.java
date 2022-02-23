@@ -22,6 +22,8 @@ public class Cab
     private String vehicleBrand;
     private String vehicleModel;
     private String vehicleColor;
+
+    @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
     private String registrationNumber;
 
@@ -29,6 +31,8 @@ public class Cab
     private Location currentLocation;
 
     private boolean isAvailable;
+
+    @Enumerated(EnumType.STRING)
     private CabMovementStatus cabMovementStatus;
 
     public Cab(String registrationNumber)

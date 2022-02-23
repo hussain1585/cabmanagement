@@ -9,9 +9,11 @@
       "houseNo": "R-279/6",
       "floorNo": "3",
       "pinCode": "110025",
-      "city": "Delhi",
-      "state": "Delhi",
-      "country": "India"
+      "serviceCity": {
+        "city": "Varanasi",
+        "state": "UP",
+        "country": "India"
+      }
     }
   ]
 }
