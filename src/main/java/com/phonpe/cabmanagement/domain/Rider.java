@@ -18,7 +18,6 @@ public class Rider
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rider_id", nullable = false)
     private Long riderId;
 
     private String name;

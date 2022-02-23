@@ -10,21 +10,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-@AllArgsConstructor
+@Entity(name = "service_cities")
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Data
-public class Address
+public class ServiceCities
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long addressId;
-    private String houseOwnerSalutation;
-    private String houseOwner;
-    private String houseNo;
-    private String floorNo;
-    private String pinCode;
+    private Long serviceCityId;
     private String city;
     private String state;
     private String country;

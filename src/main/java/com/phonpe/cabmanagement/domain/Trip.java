@@ -17,7 +17,7 @@ import java.time.LocalTime;
 public class Trip
 {
     @Id
-    @Column(name = "trip_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long tripId;
 
     @Transient

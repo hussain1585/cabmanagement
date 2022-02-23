@@ -7,10 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @Entity(name = "cab")
 @NoArgsConstructor
@@ -20,7 +17,7 @@ import javax.persistence.Transient;
 public class Cab
 {
     @Id
-    @Column(name = "cab_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long cabId;
     private String vehicleBrand;
     private String vehicleModel;

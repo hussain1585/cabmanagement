@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -13,6 +16,7 @@ import lombok.NoArgsConstructor;
 public class Location
 {
     @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long locationId;
     private double longitude;
     private double latitude;

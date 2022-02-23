@@ -18,7 +18,6 @@ public class Bill
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bill_id")
     private Long billId;
 
     private BigDecimal amount;
