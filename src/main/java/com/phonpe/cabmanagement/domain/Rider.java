@@ -21,7 +21,10 @@ public class Rider
     private Long riderId;
 
     private String name;
+
+    @Column(unique = true)
     private String mobileNo;
+
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

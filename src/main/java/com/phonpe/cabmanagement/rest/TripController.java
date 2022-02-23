@@ -16,7 +16,7 @@ public class TripController
     @Autowired
     private TripService tripService;
 
-    @PostMapping("/book/trip")
+    @PostMapping("/trip/book")
     public CabApplicationResponse bookTrip(@RequestBody BookTripRequest bookTripRequest)
     {
         return tripService.bookTrip(bookTripRequest);
