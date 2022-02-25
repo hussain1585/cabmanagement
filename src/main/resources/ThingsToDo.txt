@@ -3,3 +3,6 @@ unit testing
 integration testing
 world map by co-ordinates
 better algorithm for finding distance between two points / better algorithm to find cabs in proximity of users
+detailed logging with correct logging level
+audit trail for application
+audit events for entities
