@@ -26,16 +26,15 @@ import java.util.Optional;
 public class RiderService
 {
 
+    List<ServiceCity> allServiceCities = new ArrayList<>();
     @Autowired
     private RiderRepository riderRepository;
-
     @Autowired
     private ServiceCityRepository serviceCityRepository;
 
-    List<ServiceCity> allServiceCities = new ArrayList<>();
-
     public CabApplicationResponse registerRider(RegisterRiderRequest registerRiderRequest)
     {
+        log.debug("Register Rider with details => {}", registerRiderRequest);
         String name = registerRiderRequest.getName();
         String mobileNo = registerRiderRequest.getMobileNo();
         RegisterRiderResponse registerRiderResponse = RegisterRiderResponse.builder()
@@ -48,6 +47,7 @@ public class RiderService
 
         if (allRiderByMobileNo.isEmpty())
         {
+            log.debug("Rider with mobile No => {} is not registered yet");
             List<Address> addressList = registerRiderRequest.getAddresses();
             validateAddresses(addressList);
 
@@ -57,10 +57,13 @@ public class RiderService
                     .mobileNo(mobileNo)
                     .addresses(addressList)
                     .build();
+            log.debug("Persisting the New rider for registration with details => {}", rider);
             riderRepository.save(rider);
+            log.debug("Persisted the New rider for registration with details => {}", rider);
             registerRiderResponse.setRegistrationStatus(ApplicationConstants.SUCCESS);
         } else
         {
+            log.error("Rider with mobile no => {} is already registered", mobileNo);
             throw new RiderAlreadyRegisteredException(String.format("Rider with mobile no %s is already registered", mobileNo));
         }
         return registerRiderResponse;
@@ -68,18 +71,23 @@ public class RiderService
 
     private void validateAddresses(List<Address> addressList)
     {
+        log.debug("validating new address before registration whether its in service city list or not");
         if (allServiceCities.isEmpty())
         {
+            log.debug("initialising list of cities with service");
             allServiceCities = serviceCityRepository.findAll();
+            log.debug("initialised list of cities with total service cities => {}", allServiceCities.size());
         }
         addressList.forEach(address ->
         {
             ServiceCity serviceCity = address.getServiceCity();
             if (!allServiceCities.contains(serviceCity))
             {
+                log.error("city with name => {} is not served for now", serviceCity.getCity());
                 throw new CityWithNoServiceException(String.format("city with name %s is not served for now", serviceCity.getCity()));
             } else
             {
+                log.debug("city with name => {} is available for service", serviceCity.getCity());
                 address.setServiceCity(serviceCityRepository.findAllByCity(serviceCity.getCity()).get());
             }
         });

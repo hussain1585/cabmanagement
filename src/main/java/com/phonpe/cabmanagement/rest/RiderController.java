@@ -19,6 +19,7 @@ public class RiderController
     @PostMapping("/register/rider")
     public CabApplicationResponse registerRider(@RequestBody RegisterRiderRequest registerRiderRequest)
     {
+        log.info("Register a rider with details => {}", registerRiderRequest);
         return riderService.registerRider(registerRiderRequest);
     }
 }

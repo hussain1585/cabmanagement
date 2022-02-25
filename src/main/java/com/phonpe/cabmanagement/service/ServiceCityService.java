@@ -23,6 +23,7 @@ public class ServiceCityService
 
     public CabApplicationResponse registerServiceCity(AddServiceCityRequest addServiceCityRequest)
     {
+        log.info("Registering city as service city for cab with details => {}", addServiceCityRequest);
         String city = addServiceCityRequest.getCity();
         String state = addServiceCityRequest.getState();
         String country = addServiceCityRequest.getCountry();
@@ -38,16 +39,20 @@ public class ServiceCityService
         Optional<ServiceCity> allServiceCitiesByCityName = serviceCityRepository.findAllByCity(city);
         if (allServiceCitiesByCityName.isEmpty())
         {
+            log.debug("the city with name => {} is not already registered", city);
             ServiceCity serviceCity = ServiceCity.builder()
                     .city(city)
                     .state(state)
                     .country(country)
                     .build();
 
+            log.info("Persisting the new service city with details => {}", serviceCity);
             serviceCityRepository.save(serviceCity);
+            log.info("Persisted the new service city with details => {}", serviceCity);
             addServiceCityResponse.setCityRegistrationStatus(ApplicationConstants.SUCCESS);
         } else
         {
+            log.error("Service city => {} from state => {} in country => {} is already registered", city, state, country);
             throw new CityAlreadyRegisteredException(String.format("Service city %s from state %s in country %s is already registered", city, state, country));
         }
         return addServiceCityResponse;

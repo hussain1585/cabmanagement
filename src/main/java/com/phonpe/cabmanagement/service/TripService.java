@@ -17,6 +17,7 @@ import com.phonpe.cabmanagement.repository.CabRepository;
 import com.phonpe.cabmanagement.repository.RiderRepository;
 import com.phonpe.cabmanagement.repository.TripRepository;
 import com.phonpe.cabmanagement.util.BaseUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class TripService
 {
@@ -42,6 +44,7 @@ public class TripService
 
     public CabApplicationResponse bookTripByGivenCabAndRider(BookTripByGivenCabAndRiderRequest bookTripByGivenCabAndRiderRequest)
     {
+        log.debug("Booking trip for Rider => {} with cab => {} with details => {}", bookTripByGivenCabAndRiderRequest.getRiderMobileNo(), bookTripByGivenCabAndRiderRequest.getCabRegistrationNumber(), bookTripByGivenCabAndRiderRequest);
         LocalDate dateNow = LocalDate.now();
         LocalTime timeNow = LocalTime.now();
         BookTripByGivenCabAndRiderResponse bookTripByGivenCabAndRiderResponse = BookTripByGivenCabAndRiderResponse.builder()
@@ -62,10 +65,12 @@ public class TripService
 
         if (riderByMobileNo.isEmpty())
         {
+            log.error("Rider with mobile no => {} is not registered", riderMobileNo);
             throw new UnRegisteredRiderException(String.format("Rider with mobile no %s is not registered", riderMobileNo));
         }
         if (cabByRegistrationNumber.isEmpty())
         {
+            log.error("cab with registration No => %s is not registered", cabRegistrationNumber);
             throw new UnregisteredCabException(String.format("cab with registration No => %s is not registered", cabRegistrationNumber));
         }
         Rider rider = riderByMobileNo.get();
@@ -80,14 +85,16 @@ public class TripService
                 .tripStatus(TripStatus.IN_JOURNEY)
                 .build();
 
+        log.debug("Persisting the Trip with details => {}", trip);
         tripRepository.save(trip);
+        log.debug("Persisted the Trip with details => {}", trip);
         bookTripByGivenCabAndRiderResponse.setBookTripStatus(ApplicationConstants.SUCCESS);
-
         return bookTripByGivenCabAndRiderResponse;
     }
 
     public CabApplicationResponse bookTrip(BookTripRequest bookTripRequest)
     {
+        log.debug("Booking trip for Rider => {} with details => {}", bookTripRequest.getRiderMobileNo(), bookTripRequest);
         LocalDate dateNow = LocalDate.now();
         LocalTime timeNow = LocalTime.now();
         Location startLocation = bookTripRequest.getStartLocation();
@@ -107,6 +114,7 @@ public class TripService
 
         if (riderByMobileNo.isEmpty())
         {
+            log.error("Rider with mobile no => {} is not registered", riderMobileNo);
             throw new UnRegisteredRiderException(String.format("Rider with mobile no %s is not registered", riderMobileNo));
         }
         Rider rider = riderByMobileNo.get();
@@ -121,16 +129,19 @@ public class TripService
                 .tripStatus(TripStatus.IN_JOURNEY)
                 .build();
 
+        log.debug("Persisting the Trip with details => {}", trip);
         tripRepository.save(trip);
-
+        log.debug("Persisted the Trip with details => {}", trip);
         bookTripResponse.setBookTripStatus(ApplicationConstants.SUCCESS);
         return bookTripResponse;
     }
 
     private Cab findNearByCabs(Location bookingLocation)
     {
+        log.debug("Finding near by cabs for rider near Location =>", bookingLocation);
         if (allCabs.isEmpty())
         {
+            log.debug("Initialising the cabs list");
             allCabs = cabRepository.findAll();
         }
 
@@ -147,6 +158,7 @@ public class TripService
                 cab = current_cab;
             }
         }
+        log.debug("Found a cab with details => {} near location => {}", cab, bookingLocation);
         return cab;
     }
 }

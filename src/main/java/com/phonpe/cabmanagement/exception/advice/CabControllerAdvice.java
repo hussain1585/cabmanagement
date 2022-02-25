@@ -20,7 +20,6 @@ public class CabControllerAdvice
     public ResponseEntity<CabApplicationExceptionResponse> handleCabAlreadyRegisteredException(CabAlreadyRegisteredException cabAlreadyRegisteredException)
     {
         log.debug("handling API exception => CabAlreadyRegisteredException ");
-        //        ZonedDateTime now = ZonedDateTime.now();
         CabApplicationExceptionResponse cabApplicationExceptionResponse = CabApplicationExceptionResponse
                 .builder()
                 .error(cabAlreadyRegisteredException.getMessage())
@@ -35,7 +34,6 @@ public class CabControllerAdvice
     public ResponseEntity<CabApplicationExceptionResponse> handleUnregisteredCabException(UnregisteredCabException unregisteredCabException)
     {
         log.debug("handling API exception => UnregisteredCabException ");
-        //        ZonedDateTime now = ZonedDateTime.now();
         CabApplicationExceptionResponse cabApplicationExceptionResponse = CabApplicationExceptionResponse
                 .builder()
                 .error(unregisteredCabException.getMessage())

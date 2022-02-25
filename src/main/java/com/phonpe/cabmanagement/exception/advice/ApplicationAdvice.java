@@ -14,7 +14,7 @@ public class ApplicationAdvice
     @ExceptionHandler(Exception.class)
     public ResponseEntity<CabApplicationExceptionResponse> handleGenericException(Exception exception)
     {
-        log.info("handling API exception => Exception ");
+        log.debug("handling API exception => Exception ");
         CabApplicationExceptionResponse cabApplicationExceptionResponse = CabApplicationExceptionResponse
                 .builder()
                 .error(exception.getMessage())

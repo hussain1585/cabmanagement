@@ -20,12 +20,14 @@ public class TripController
     @PostMapping("/trip/bookTripByGivenCabAndRider")
     public CabApplicationResponse bookTripByGivenCabAndRider(@RequestBody BookTripByGivenCabAndRiderRequest bookTripByGivenCabAndRiderRequest)
     {
+        log.info("Booking a trip for a with a rider and a cab with details => {}", bookTripByGivenCabAndRiderRequest);
         return tripService.bookTripByGivenCabAndRider(bookTripByGivenCabAndRiderRequest);
     }
 
     @PostMapping("/trip/bookTrip")
     public CabApplicationResponse bookTrip(@RequestBody BookTripRequest bookTripRequest)
     {
+        log.info("Booking a trip with details => {}", bookTripRequest);
         return tripService.bookTrip(bookTripRequest);
     }
 }

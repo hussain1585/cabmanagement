@@ -1,7 +1,6 @@
 package com.phonpe.cabmanagement.exception.advice;
 
 import com.phonpe.cabmanagement.dto.CabApplicationExceptionResponse;
-import com.phonpe.cabmanagement.exception.CabAlreadyRegisteredException;
 import com.phonpe.cabmanagement.exception.RiderAlreadyRegisteredException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,7 @@ public class ServiceCityControllerAdvice
     @ExceptionHandler(RiderAlreadyRegisteredException.class)
     public ResponseEntity<CabApplicationExceptionResponse> handleRiderAlreadyRegisteredException(RiderAlreadyRegisteredException riderAlreadyRegisteredException)
     {
-        log.info("handling API exception => RiderAlreadyRegisteredException ");
+        log.debug("handling API exception => RiderAlreadyRegisteredException ");
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
 
         CabApplicationExceptionResponse cabApplicationExceptionResponse = CabApplicationExceptionResponse

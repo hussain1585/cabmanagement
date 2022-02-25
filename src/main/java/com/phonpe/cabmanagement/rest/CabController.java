@@ -34,18 +34,21 @@ public class CabController
     @PostMapping("/cab/register")
     public CabApplicationResponse registerCab(@RequestBody RegisterCabRequest registerCabRequest)
     {
+        log.info("Register cab with details => ", registerCabRequest);
         return cabService.registerCab(registerCabRequest);
     }
 
     @PostMapping("/cab/changeLocation")
     public CabApplicationResponse changeLocation(@RequestBody CabChangeLocationRequest cabChangeLocationRequest)
     {
+        log.info("Change the location of the current cab with details=> ", cabChangeLocationRequest);
         return cabService.changeLocation(cabChangeLocationRequest);
     }
 
     @PostMapping("/cab/changeCabMovementStatus")
     public CabApplicationResponse changeCabMovementStatus(@RequestBody CabChangeCabMovementStatusRequest cabChangeCabMovementStatusRequest)
     {
+        log.info("Change the movement status of the current cab with details=> ", cabChangeCabMovementStatusRequest);
         return cabService.changeCabMovementStatus(cabChangeCabMovementStatusRequest);
     }
 
@@ -53,6 +56,7 @@ public class CabController
     @PostMapping("/cab/toggleCabMovementStatus")
     public CabApplicationResponse toggleCabMovementStatus(@RequestBody ToggleCabMovementStatusRequest toggleCabMovementStatusRequest)
     {
+        log.info("Toggling the movement status of the current cab with details=> ", toggleCabMovementStatusRequest);
         return cabService.toggleCabMovementStatus(toggleCabMovementStatusRequest);
     }
 

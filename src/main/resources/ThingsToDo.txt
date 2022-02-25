@@ -6,3 +6,4 @@ better algorithm for finding distance between two points / better algorithm to f
 detailed logging with correct logging level
 audit trail for application
 audit events for entities
+field validation for DTOs

@@ -19,6 +19,7 @@ public class ServiceCitiesController
     @PostMapping("/register/servicecity")
     public CabApplicationResponse registerServiceCity(@RequestBody AddServiceCityRequest addServiceCityRequest)
     {
+        log.info("Registering a city for service with details => {}", addServiceCityRequest);
         return serviceCityService.registerServiceCity(addServiceCityRequest);
     }
 }

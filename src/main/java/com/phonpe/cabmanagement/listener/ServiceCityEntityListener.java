@@ -11,36 +11,36 @@ public class ServiceCityEntityListener
     @PrePersist
     public void prePersist(ServiceCity serviceCity)
     {
-        log.info("prePersist : entity ServiceCities with id=>{} will be persisted to DB with body", serviceCity.getServiceCityId(), serviceCity);
+        log.debug("prePersist : entity ServiceCities with id=>{} will be persisted to DB with body", serviceCity.getServiceCityId(), serviceCity);
     }
 
     @PostPersist
     public void postPersist(ServiceCity serviceCity)
     {
-        log.info("postPersist : entity ServiceCities with id=>{} is persisted to DB with body", serviceCity.getServiceCityId(), serviceCity);
+        log.debug("postPersist : entity ServiceCities with id=>{} is persisted to DB with body", serviceCity.getServiceCityId(), serviceCity);
     }
 
     @PreUpdate
     public void preUpdate(ServiceCity serviceCity)
     {
-        log.info("preUpdate : entity ServiceCities with id=>{} will be updated to DB with body", serviceCity.getServiceCityId(), serviceCity);
+        log.debug("preUpdate : entity ServiceCities with id=>{} will be updated to DB with body", serviceCity.getServiceCityId(), serviceCity);
     }
 
     @PostUpdate
     public void postUpdate(ServiceCity serviceCity)
     {
-        log.info("postUpdate : entity ServiceCities with id=>{} is updated to DB with body", serviceCity.getServiceCityId(), serviceCity);
+        log.debug("postUpdate : entity ServiceCities with id=>{} is updated to DB with body", serviceCity.getServiceCityId(), serviceCity);
     }
 
     @PreRemove
     public void preRemove(ServiceCity serviceCity)
     {
-        log.info("preRemove : entity ServiceCities with id=>{} will be removed from DB with body", serviceCity.getServiceCityId(), serviceCity);
+        log.debug("preRemove : entity ServiceCities with id=>{} will be removed from DB with body", serviceCity.getServiceCityId(), serviceCity);
     }
 
     @PostRemove
     public void postRemove(ServiceCity serviceCity)
     {
-        log.info("postRemove : entity ServiceCities with id=>{} is removed to DB with body", serviceCity.getServiceCityId(), serviceCity);
+        log.debug("postRemove : entity ServiceCities with id=>{} is removed to DB with body", serviceCity.getServiceCityId(), serviceCity);
     }
 }
