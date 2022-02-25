@@ -2,6 +2,7 @@ package com.phonpe.cabmanagement.domain;
 
 import com.phonpe.cabmanagement.enums.CabMovementStatus;
 import com.phonpe.cabmanagement.enums.VehicleType;
+import com.phonpe.cabmanagement.listener.CabEntityListener;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Data
+@EntityListeners(CabEntityListener.class)
 public class Cab
 {
     @Id

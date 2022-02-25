@@ -1,5 +1,6 @@
 package com.phonpe.cabmanagement.domain;
 
+import com.phonpe.cabmanagement.listener.RiderEntityListener;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Data
+@EntityListeners(RiderEntityListener.class)
 public class Rider
 {
     @Id
