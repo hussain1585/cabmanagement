@@ -18,7 +18,7 @@ public class RiderControllerAdvice
     @ExceptionHandler(RiderAlreadyRegisteredException.class)
     public ResponseEntity<CabApplicationExceptionResponse> handleRiderAlreadyRegisteredException(RiderAlreadyRegisteredException riderAlreadyRegisteredException)
     {
-        log.info("handling API exception => RiderAlreadyRegisteredException ");
+        log.debug("handling API exception => RiderAlreadyRegisteredException ");
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
 
         CabApplicationExceptionResponse cabApplicationExceptionResponse = CabApplicationExceptionResponse
@@ -33,7 +33,7 @@ public class RiderControllerAdvice
     @ExceptionHandler(CityWithNoServiceException.class)
     public ResponseEntity<CabApplicationExceptionResponse> handleCityWithNoServiceException(CityWithNoServiceException cityWithNoServiceException)
     {
-        log.info("handling API exception => CityWithNoServiceException ");
+        log.debug("handling API exception => CityWithNoServiceException ");
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
 
         CabApplicationExceptionResponse cabApplicationExceptionResponse = CabApplicationExceptionResponse

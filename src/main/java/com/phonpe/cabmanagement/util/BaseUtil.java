@@ -8,6 +8,7 @@ public class BaseUtil
 {
     public static double getDifferenceBetweenLocations(Location loc1, Location loc2)
     {
+        log.debug("fetching euclidean distance between two loc1 => {} and loc2 => {}", loc1, loc2);
 
         // The math module contains a function
         // named toRadians which converts from
@@ -30,6 +31,8 @@ public class BaseUtil
         double r = 6371;
 
         // calculate the result
-        return (c * r);
+        double euclideanDistance = c * r;
+        log.debug("Euclidean distance between loc1 => {} and loc2 => {} is => {}", loc1, loc2, euclideanDistance);
+        return euclideanDistance;
     }
 }
