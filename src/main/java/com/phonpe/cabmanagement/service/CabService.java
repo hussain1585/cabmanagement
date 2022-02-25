@@ -10,6 +10,7 @@ import com.phonpe.cabmanagement.enums.CabMovementStatus;
 import com.phonpe.cabmanagement.enums.VehicleType;
 import com.phonpe.cabmanagement.exception.CabAlreadyRegisteredException;
 import com.phonpe.cabmanagement.exception.UnregisteredCabException;
+import com.phonpe.cabmanagement.repository.CabEventEntityRepository;
 import com.phonpe.cabmanagement.repository.CabRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class CabService
 {
     @Autowired
     private CabRepository cabRepository;
+
+    @Autowired
+    private CabEventEntityRepository cabEventEntityRepository;
 
     public CabApplicationResponse registerCab(RegisterCabRequest registerCabRequest)
     {
@@ -179,4 +183,6 @@ public class CabService
         }
         return toggleCabMovementStatusResponse;
     }
+
+
 }
