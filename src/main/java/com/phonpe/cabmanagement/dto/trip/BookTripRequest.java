@@ -1,11 +1,7 @@
 package com.phonpe.cabmanagement.dto.trip;
 
-import com.phonpe.cabmanagement.domain.Bill;
 import com.phonpe.cabmanagement.domain.Location;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,11 +10,12 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class BookTripRequest
 {
     private Location startLocation;
     private Location bookedDestination;
     private LocalDate rideStartDate;
     private LocalTime rideStartTime;
-    private String RiderMobileNo;
+    private String riderMobileNo;
 }
